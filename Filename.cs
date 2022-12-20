@@ -21,6 +21,17 @@
 // SOFTWARE.
 namespace hvc.Extensions;
 
+/// <summary>
+///    Creates an instance that represents a filename.
+///
+/// var filename = new Filename("C:\temp\file.txt");
+/// 
+/// Console.WriteLine(filename.Full);       // Outputs "C:\temp\file.txt"
+/// Console.WriteLine(filename.Path);       // Outputs "C:\temp"
+/// Console.WriteLine(filename.Name);       // Outputs "file"
+/// Console.WriteLine(filename.Extension);  // Outputs "txt"
+/// 
+/// </summary>
 public class Filename
 {
     public Filename(String filename)

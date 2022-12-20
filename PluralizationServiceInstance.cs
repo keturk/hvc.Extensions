@@ -31,6 +31,9 @@ public static class PluralizationServiceInstance
     private static readonly IPluralizationApi Api;
     private static readonly CultureInfo CultureInfo;
 
+    /// <summary>
+    ///    Initializes the <see cref="PluralizationServiceInstance" /> class.
+    /// </summary>
     static PluralizationServiceInstance()
     {
         var builder = new PluralizationApiBuilder();
@@ -40,16 +43,31 @@ public static class PluralizationServiceInstance
         CultureInfo = new CultureInfo("en-US");
     }
 
-    public static Boolean IsSingular(this String name)
+    /// <summary>
+    ///    Returns true if content of value is singular, false otherwise.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns>True if value is singular</returns>
+    public static Boolean IsSingular(this String value)
     {
-        return !String.IsNullOrWhiteSpace(name) && Api.IsSingular(name);
+        return !String.IsNullOrWhiteSpace(value) && Api.IsSingular(value);
     }
 
+    /// <summary>
+    ///    Returns the plural form of the word.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String ToPlural(this String value)
     {
         return Api.Pluralize(value, CultureInfo);
     }
 
+    /// <summary>
+    ///    Returns the singular form of the word.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String ToSingular(this String value)
     {
         return Api.Singularize(value, CultureInfo);

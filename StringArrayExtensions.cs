@@ -26,6 +26,15 @@ namespace hvc.Extensions;
 
 public static class StringArrayExtensions
 {
+    /// <summary>
+    ///     Combines items of values array into a single string.
+    ///     If separator is specified, it adds separator between items.
+    ///     If prefix is specified, it adds a prefix to each item.
+    /// </summary>
+    /// <param name="values"></param>
+    /// <param name="separator"></param>
+    /// <param name="prefix"></param>
+    /// <returns></returns>
     public static String Combine(this String[] values, String? separator = null, String? prefix = null)
     {
         var sb = new StringBuilder();
@@ -39,11 +48,21 @@ public static class StringArrayExtensions
         return sb.ToString();
     }
 
+    /// <summary>
+    ///     Returns true if values array is empty.
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static Boolean IsEmpty(this String[] values)
     {
         return !values.Any();
     }
 
+    /// <summary>
+    ///     Sorts values array into a cloned array without changing order of items in values array.
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static String[] Sort(this String[] values)
     {
         var clonedValues = new String[values.Length];
@@ -55,11 +74,22 @@ public static class StringArrayExtensions
         return clonedValues;
     }
 
+    /// <summary>
+    ///     Adds double quotes to the beginning and end of all items in values.
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns>String array containing double quoted values</returns>
     public static String[] Quote(this List<String> values)
     {
         return Quote(values.ToArray());
     }
 
+    /// <summary>
+    ///     Adds double quotes to each item of values array. If item is already quoted or double quoted, it removes that quotation and
+    ///     double quotes it.
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static String[] Quote(this String[] values)
     {
         var quotedValues = new String[values.Length];
@@ -71,11 +101,21 @@ public static class StringArrayExtensions
         return quotedValues;
     }
 
+    /// <summary>
+    ///     Calls StringFormatExtensions.CamelCase method for each item of values list
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static String[] CamelCase(this List<String> values)
     {
         return CamelCase(values.ToArray());
     }
 
+    /// <summary>
+    ///     Calls StringFormatExtensions.CamelCase method for each item of values array
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static String[] CamelCase(this String[] values)
     {
         var returnValues = new String[values.Length];
@@ -87,6 +127,11 @@ public static class StringArrayExtensions
         return returnValues;
     }
 
+    /// <summary>
+    ///     Calls StringFormatExtensions.SnakeCase method for each item of values array
+    /// </summary>
+    /// <param name="values"></param>
+    /// <returns></returns>
     public static String[] SnakeCase(this String[] values)
     {
         var returnValues = new String[values.Length];

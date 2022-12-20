@@ -1,5 +1,4 @@
-﻿// add comment
-// MIT License
+﻿// MIT License
 //
 // Copyright (c) 2022 Kamil Ercan Turkarslan
 //

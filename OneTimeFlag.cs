@@ -22,10 +22,19 @@
 
 namespace hvc.Extensions;
 
+/// <summary>
+///     A one time flag that can be set only once.
+///     Can be used for appending comma separated values to a string
+/// </summary>
 public class OneTimeFlag
 {
     private Boolean _flag = true;
 
+    /// <summary>
+    ///     Returns true if the flag has not been raised yet, and false otherwise. If the flag has not been raised yet, it sets
+    ///     _flag to false so that subsequent calls to this method will return false.
+    /// </summary>
+    /// <returns></returns>
     public Boolean IsFirstTime()
     {
         if (!_flag)
@@ -35,6 +44,9 @@ public class OneTimeFlag
         return true;
     }
 
+    /// <summary>
+    ///    Resets the flag to true.
+    /// </summary>
     public void RaiseFlag()
     {
         _flag = true;

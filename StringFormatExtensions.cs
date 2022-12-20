@@ -72,16 +72,40 @@ public static class StringFormatExtensions
         return instance.Replace(subString, String.Empty).Trim();
     }
 
+
+    /// <summary>
+    ///     Removes quotation marks from the beginning and end of a string. It first checks whether the provided value is null,
+    ///     and if it is, it returns an empty string. If value is not null, it performs the following operations:
+    ///     Trim any leading or trailing whitespace from the string
+    ///     Trim any double quotation marks(") from the beginning and end of the string
+    ///     Trim any additional leading or trailing whitespace from the string
+    ///     Trim any single quotation marks (') from the beginning and end of the string
+    ///     Trim any additional leading or trailing whitespace from the string
+    ///     Finally, the method returns the resulting string.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String Unquote(this String? value)
     {
         return (value ?? String.Empty).Trim().Trim('"').Trim().Trim('\'').Trim();
     }
 
+    /// <summary>
+    ///     Puts content of value in double quotes
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String Quote(this String value)
     {
         return $"\"{value}\"";
     }
 
+    /// <summary>
+    ///     If not null, inserts value to the beginning of inputString
+    /// </summary>
+    /// <param name="inputString"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String Prepend(this String inputString, String? value)
     {
         return inputString.Insert(0, value ?? String.Empty);
@@ -127,11 +151,40 @@ public static class StringFormatExtensions
         return result.ToString();
     }
 
+    /// <summary>
+    ///     Converts a string to "friendly case," which generally means converting it to a more human-readable format.
+    ///     Finds any uppercase letters in the input string (value) that are not at the beginning of the string, and inserts a
+    ///     space before each of them. For example, if the input string is "HelloWorld",
+    ///     the output string would be "Hello World".
+    ///     This method can be useful for converting a string that was written in camelCase or PascalCase(where each word is
+    ///     concatenated without spaces, with the first letter of each word capitalized) to a more readable format with spaces
+    ///     between the words.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String ToFriendlyCase(this String value)
     {
-        return Regex.Replace(value, "(?!^)([A-Z])", " $1");
+        // (?!^) is a negative lookahead assertion that ensures that the character being matched is not the beginning of the string.
+        // [A-Z] matches any uppercase letter.
+        const String regex = "(?!^)([A-Z])";
+
+        // " $1" is the replacement string, which consists of a space followed by the character that was matched ($1).
+        return Regex.Replace(value, regex, " $1");
     }
 
+    /// <summary>
+    ///     Converts a string to "title case," which generally means capitalizing the first letter of each word in the string.
+    /// 
+    ///     The method first checks whether the provided value is null or consists only of whitespace characters.
+    ///
+    ///     If it is, it returns an empty string.
+    /// 
+    ///     If value is not null or empty, it returns a new string with the following modifications:
+    ///         The first character of the string is converted to uppercase using the Char.ToUpper() method.
+    ///         The remaining characters of the string are left unchanged.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public static String ToTitleCase(this String? value)
     {
         return String.IsNullOrWhiteSpace(value) ? String.Empty : $"{Char.ToUpper(value[0])}{value[1..]}";
